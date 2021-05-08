@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1786,1653</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1146,1653</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -338,7 +338,7 @@
                   <InArgument x:TypeArguments="njl:JObject">[(from i in PTLoop let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.Contains("N1_LOOP_1")) Select temp)(0)]</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddBTOrST workflow" sap:VirtualizedContainerService.HintSize="262,51" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="AddBTOrST.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddBTOrST workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867/AddBTOrST.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
                   <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">[from i in N1Loop1("N1_LOOP_1") Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)]</InArgument>
                   <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
@@ -668,10 +668,14 @@
                   <InArgument x:TypeArguments="njl:JObject">[(from i in PTLoop let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.Contains("QTY_LOOP_1")) Select temp)(0)]</InArgument>
                 </Assign.Value>
               </Assign>
-              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddSaleOrReturn workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="AddSaleOrReturn.xaml">
+              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddSaleOrReturn workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867/AddSaleOrReturn.xaml">
                 <ui:InvokeWorkflowFile.Arguments>
-                  <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">[from i in QTYLoop("QTY_LOOP_1") Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)]</InArgument>
-                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
+                  <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">
+                    <mva:VisualBasicValue x:TypeArguments="sc:IEnumerable" ExpressionText="from i in QTYLoop(&quot;QTY_LOOP_1&quot;) Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)" />
+                  </InArgument>
+                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">
+                    <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="ValueDictionary" />
+                  </InOutArgument>
                 </ui:InvokeWorkflowFile.Arguments>
               </ui:InvokeWorkflowFile>
             </Sequence>
