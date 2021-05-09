@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\TARGET\1053228_TARGET_50-20210502131307-37d4d7ce.edi.edi.json" this:JsonReader.in_OutputFile="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\TARGET\1053228_TARGET_50-20210502131307-37d4d7.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\BestBuy\1053185_STERLING_391995705297321078256420.dat.edi.json" this:JsonReader.in_OutputFile="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\BestBuy\1053185_STERLING_391995705297321078256420.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_OutputFile" Type="InArgument(x:String)" />
@@ -9,7 +9,7 @@
   <sap:VirtualizedContainerService.HintSize>1146,1229</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="37">
+    <scg:List x:TypeArguments="x:String" Capacity="74">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -47,6 +47,7 @@
       <x:String>UiPath.CSV.Activities</x:String>
       <x:String>UiPath.Excel</x:String>
       <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -79,6 +80,7 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -171,13 +173,13 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each LIN" sap:VirtualizedContainerService.HintSize="490,964" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[LINArray]">
+    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each LIN" sap:VirtualizedContainerService.HintSize="731,1214" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[LINArray]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="njl:JObject">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="njl:JObject" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="454,830" sap2010:WorkflowViewState.IdRef="Sequence_30">
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="695,1080" sap2010:WorkflowViewState.IdRef="Sequence_30">
             <Sequence.Variables>
               <Variable x:TypeArguments="njl:JObject[]" Name="PTLoop" />
               <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
@@ -190,7 +192,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+            <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_56">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week Start Date")]</OutArgument>
               </Assign.To>
@@ -198,7 +200,7 @@
                 <InArgument x:TypeArguments="x:String">[WeekStartDate]</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_57">
+            <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_57">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week End Date")]</OutArgument>
               </Assign.To>
@@ -206,7 +208,7 @@
                 <InArgument x:TypeArguments="x:String">[WeekEndDate]</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign DisplayName="Assign EAN Number" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_66">
+            <Assign DisplayName="Assign EAN Number" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_66">
               <Assign.To>
                 <OutArgument x:TypeArguments="x:String">[ValueDictionary("EAN Number")]</OutArgument>
               </Assign.To>
@@ -214,15 +216,43 @@
                 <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_03").ToString]</InArgument>
               </Assign.Value>
             </Assign>
-            <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_67">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_05").ToString]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="412,338" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[(from i in item.First.First.ToObject(of JArray) let temp= i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ZA&quot;)) Select temp).ToArray]">
+            <If Condition="[SenderID.Trim = &quot;6111470100&quot;]" DisplayName="If target" sap:VirtualizedContainerService.HintSize="653,310" sap2010:WorkflowViewState.IdRef="If_1">
+              <If.Then>
+                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_68">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_07").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Then>
+              <If.Else>
+                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_67">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_05").ToString]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                </Sequence>
+              </If.Else>
+            </If>
+            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,338" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[(from i in item.First.First.ToObject(of JArray) let temp= i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ZA&quot;)) Select temp).ToArray]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="njl:JObject">
                   <ActivityAction.Argument>
