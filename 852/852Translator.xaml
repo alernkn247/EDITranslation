@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1146,1229</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1146,1524</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="74">
@@ -88,7 +88,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="426,1064" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="454,1359" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="JsonText" />
       <Variable x:TypeArguments="njl:JObject" Name="JsonObject" />
@@ -109,183 +109,199 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadTextFile Content="[JsonText]" DisplayName="Read Text File" FileName="[in_FilePath]" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonObject]" JsonString="[JsonText]" />
-    <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="384,191" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
-      <ui:MultipleAssign.AssignOperations>
-        <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="njl:JToken">[STLoop]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="njl:JToken">[JsonObject("ISA_LOOP_1")(1)("GS_LOOP_1")(1)("ST_LOOP_1")]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="x:String">[SenderID]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="x:String">[JsonObject("ISA_LOOP_1")(0)("ISA_06").ToString]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_8">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="njl:JObject[]">[LINArray]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="njl:JObject[]">[(from i in STLoop.ToObject(Of JArray) let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith("LIN")) Select temp).ToArray]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-          <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_11">
-            <ui:AssignOperation.To>
-              <OutArgument x:TypeArguments="njl:JObject[]">[XQArray]</OutArgument>
-            </ui:AssignOperation.To>
-            <ui:AssignOperation.Value>
-              <InArgument x:TypeArguments="njl:JObject[]">[(from i in STLoop.ToObject(Of JArray) let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith("XQ")) Select temp).ToArray]</InArgument>
-            </ui:AssignOperation.Value>
-          </ui:AssignOperation>
-        </scg:List>
-      </ui:MultipleAssign.AssignOperations>
-    </ui:MultipleAssign>
-    <Sequence DisplayName="Get Week Start Date and End Date" sap:VirtualizedContainerService.HintSize="384,66" sap2010:WorkflowViewState.IdRef="Sequence_37">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <Assign DisplayName="Assign Week Start Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_64">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[WeekStartDate]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[XQArray(0)("XQ_02").ToString]</InArgument>
-        </Assign.Value>
-      </Assign>
-      <Assign DisplayName="Assign Week End Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_65">
-        <Assign.To>
-          <OutArgument x:TypeArguments="x:String">[WeekEndDate]</OutArgument>
-        </Assign.To>
-        <Assign.Value>
-          <InArgument x:TypeArguments="x:String">[XQArray(0)("XQ_03").ToString]</InArgument>
-        </Assign.Value>
-      </Assign>
-    </Sequence>
-    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each LIN" sap:VirtualizedContainerService.HintSize="731,1214" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[LINArray]">
+    <ui:ReadTextFile Content="[JsonText]" DisplayName="Read Text File" FileName="[in_FilePath]" sap:VirtualizedContainerService.HintSize="412,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonObject]" JsonString="[JsonText]" />
+    <Assign sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_70">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[SenderID]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[JsonObject("ISA_LOOP_1")(0)("ISA_06").ToString]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="412,583" sap2010:WorkflowViewState.IdRef="ForEach`1_15" Values="[(from i in JsonObject(&quot;ISA_LOOP_1&quot;)(1)(&quot;GS_LOOP_1&quot;) let temp = i.ToObject(of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ST_LOOP&quot;)) Select temp)]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="njl:JObject">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="njl:JObject" Name="item" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="695,1080" sap2010:WorkflowViewState.IdRef="Sequence_30">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="njl:JObject[]" Name="PTLoop" />
-              <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
-              <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(Of string,string)]" Name="ValueDictionary" />
-              <Variable x:TypeArguments="njl:JObject" Name="N1Loop2" />
-              <Variable x:TypeArguments="njl:JObject" Name="QTYLoop" />
-            </Sequence.Variables>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,449" sap2010:WorkflowViewState.IdRef="Sequence_42">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_56">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week Start Date")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[WeekStartDate]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_57">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week End Date")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[WeekEndDate]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <Assign DisplayName="Assign EAN Number" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_66">
-              <Assign.To>
-                <OutArgument x:TypeArguments="x:String">[ValueDictionary("EAN Number")]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_03").ToString]</InArgument>
-              </Assign.Value>
-            </Assign>
-            <If Condition="[SenderID.Trim = &quot;6111470100&quot;]" DisplayName="If target" sap:VirtualizedContainerService.HintSize="653,310" sap2010:WorkflowViewState.IdRef="If_1">
-              <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_41">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_68">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_07").ToString]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </Sequence>
-              </If.Then>
-              <If.Else>
-                <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_40">
-                  <sap:WorkflowViewStateService.ViewState>
-                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    </scg:Dictionary>
-                  </sap:WorkflowViewStateService.ViewState>
-                  <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_67">
-                    <Assign.To>
-                      <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
-                    </Assign.To>
-                    <Assign.Value>
-                      <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_05").ToString]</InArgument>
-                    </Assign.Value>
-                  </Assign>
-                </Sequence>
-              </If.Else>
-            </If>
-            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,338" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[(from i in item.First.First.ToObject(of JArray) let temp= i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ZA&quot;)) Select temp).ToArray]">
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="334,160" sap2010:WorkflowViewState.IdRef="MultipleAssign_2">
+              <ui:MultipleAssign.AssignOperations>
+                <scg:List x:TypeArguments="ui:AssignOperation" Capacity="8">
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_12">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="njl:JToken">[STLoop]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="njl:JToken">[item.First.First]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_13">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="njl:JObject[]">[LINArray]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="njl:JObject[]">[(from i in STLoop.ToObject(Of JArray) let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith("LIN")) Select temp).ToArray]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_14">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="njl:JObject[]">[XQArray]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="njl:JObject[]">[(from i in STLoop.ToObject(Of JArray) let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith("XQ")) Select temp).ToArray]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
+                </scg:List>
+              </ui:MultipleAssign.AssignOperations>
+            </ui:MultipleAssign>
+            <Sequence DisplayName="Get Week Start Date and End Date" sap:VirtualizedContainerService.HintSize="334,66" sap2010:WorkflowViewState.IdRef="Sequence_37">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+              <Assign DisplayName="Assign Week Start Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_64">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[WeekStartDate]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[XQArray(0)("XQ_02").ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+              <Assign DisplayName="Assign Week End Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_65">
+                <Assign.To>
+                  <OutArgument x:TypeArguments="x:String">[WeekEndDate]</OutArgument>
+                </Assign.To>
+                <Assign.Value>
+                  <InArgument x:TypeArguments="x:String">[XQArray(0)("XQ_03").ToString]</InArgument>
+                </Assign.Value>
+              </Assign>
+            </Sequence>
+            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each LIN" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[LINArray]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="njl:JObject">
                   <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="njl:JObject" Name="obj" />
+                    <DelegateInArgument x:TypeArguments="njl:JObject" Name="item" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="695,1080" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="njl:JObject[]" Name="PTLoop" />
+                      <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
+                      <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(Of string,string)]" Name="ValueDictionary" />
+                      <Variable x:TypeArguments="njl:JObject" Name="N1Loop2" />
+                      <Variable x:TypeArguments="njl:JObject" Name="QTYLoop" />
+                    </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ProcessZALoop workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="852\ProcessZALoop.xaml">
-                      <ui:InvokeWorkflowFile.Arguments>
-                        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
-                        <InArgument x:TypeArguments="njl:JObject" x:Key="in_ZAItem">[obj]</InArgument>
-                        <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">[in_OutputFile]</InArgument>
-                      </ui:InvokeWorkflowFile.Arguments>
-                    </ui:InvokeWorkflowFile>
+                    <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week Start Date")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[WeekStartDate]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_57">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[ValueDictionary("Week End Date")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[WeekEndDate]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <Assign DisplayName="Assign EAN Number" sap:VirtualizedContainerService.HintSize="653,60" sap2010:WorkflowViewState.IdRef="Assign_66">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[ValueDictionary("EAN Number")]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_03").ToString]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                    <If Condition="[SenderID.Trim = &quot;6111470100&quot;]" DisplayName="If target" sap:VirtualizedContainerService.HintSize="653,310" sap2010:WorkflowViewState.IdRef="If_1">
+                      <If.Then>
+                        <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_68">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_07").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </If.Then>
+                      <If.Else>
+                        <Sequence sap:VirtualizedContainerService.HintSize="304,152" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <Assign DisplayName="Assign SKU ID" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_67">
+                            <Assign.To>
+                              <OutArgument x:TypeArguments="x:String">[ValueDictionary("SKU ID")]</OutArgument>
+                            </Assign.To>
+                            <Assign.Value>
+                              <InArgument x:TypeArguments="x:String">[item.First.First(0)("LIN_05").ToString]</InArgument>
+                            </Assign.Value>
+                          </Assign>
+                        </Sequence>
+                      </If.Else>
+                    </If>
+                    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,338" sap2010:WorkflowViewState.IdRef="ForEach`1_14" Values="[(from i in item.First.First.ToObject(of JArray) let temp= i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ZA&quot;)) Select temp).ToArray]">
+                      <ui:ForEach.Body>
+                        <ActivityAction x:TypeArguments="njl:JObject">
+                          <ActivityAction.Argument>
+                            <DelegateInArgument x:TypeArguments="njl:JObject" Name="obj" />
+                          </ActivityAction.Argument>
+                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_39">
+                            <sap:WorkflowViewStateService.ViewState>
+                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              </scg:Dictionary>
+                            </sap:WorkflowViewStateService.ViewState>
+                            <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke ProcessZALoop workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_4" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="852\ProcessZALoop.xaml">
+                              <ui:InvokeWorkflowFile.Arguments>
+                                <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
+                                <InArgument x:TypeArguments="njl:JObject" x:Key="in_ZAItem">[obj]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">[in_OutputFile]</InArgument>
+                              </ui:InvokeWorkflowFile.Arguments>
+                            </ui:InvokeWorkflowFile>
+                          </Sequence>
+                        </ActivityAction>
+                      </ui:ForEach.Body>
+                    </ui:ForEach>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">True</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="412,51" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -293,7 +309,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadCsvFile>
-    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="384,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[in_OutputFile+&quot;.xlsx&quot;]" />
-    <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[in_OutputFile]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="412,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[in_OutputFile+&quot;.xlsx&quot;]" />
+    <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="412,79" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[in_OutputFile]" />
   </Sequence>
 </Activity>
