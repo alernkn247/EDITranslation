@@ -7,7 +7,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1452,1187</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1146,631</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessZALoop_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="33">
@@ -47,7 +47,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="20">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="40">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -68,25 +68,23 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ProcessZALoop" sap:VirtualizedContainerService.HintSize="304,443" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ProcessZALoop" sap:VirtualizedContainerService.HintSize="304,343" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_7">
-      <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[io_ValueDictionary("Returns")]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="x:String">
-          <Literal x:TypeArguments="x:String" Value="" />
-        </InArgument>
-      </Assign.Value>
-    </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
+    <Assign DisplayName="Init Inventory" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[io_ValueDictionary("Inventory")]</OutArgument>
       </Assign.To>
@@ -96,7 +94,7 @@
         </InArgument>
       </Assign.Value>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
+    <Assign DisplayName="Init Sales" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[io_ValueDictionary("Sales")]</OutArgument>
       </Assign.To>
@@ -116,11 +114,7 @@
             <Sequence.Variables>
               <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="JsonDic" />
               <Variable x:TypeArguments="x:String" Name="MaxItems" />
-              <Variable x:TypeArguments="x:Boolean" Name="ExtractInfo">
-                <Variable.Default>
-                  <Literal x:TypeArguments="x:Boolean" Value="True" />
-                </Variable.Default>
-              </Variable>
+              <Variable x:TypeArguments="x:Boolean" Default="True" Name="ExtractInfo" />
             </Sequence.Variables>
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -146,7 +140,7 @@
                 </Assign>
               </If.Then>
             </If>
-            <If Condition="[JsonDic.Keys.Any(Function(x) x.StartsWith(&quot;SDQ&quot;))]" DisplayName="If SDQ" sap:VirtualizedContainerService.HintSize="731,1437" sap2010:WorkflowViewState.IdRef="If_2">
+            <If Condition="[JsonDic.Keys.Any(Function(x) x.StartsWith(&quot;SDQ&quot;))]" DisplayName="If SDQ" sap:VirtualizedContainerService.HintSize="731,1921" sap2010:WorkflowViewState.IdRef="If_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -154,7 +148,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="695,1260" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence sap:VirtualizedContainerService.HintSize="695,1744" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -168,13 +162,13 @@
                       <InArgument x:TypeArguments="x:String">[Regex.Match(JsonDic.Last.Key,"\d+").ToString]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,1068" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[(from i in JsonDic.Keys let val = CInt(Regex.Match(i,&quot;\d+&quot;).ToString) where val mod 2= 1 Select i)]">
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,1552" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[(from i in JsonDic.Keys let val = CInt(Regex.Match(i,&quot;\d+&quot;).ToString) where val mod 2= 1 Select i)]">
                     <ui:ForEach.Body>
                       <ActivityAction x:TypeArguments="x:String">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="617,934" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="617,1418" sap2010:WorkflowViewState.IdRef="Sequence_3">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Int32" Name="ItemNumber" />
                             <Variable x:TypeArguments="x:String" Name="NextKey" />
@@ -200,15 +194,15 @@
                               <InArgument x:TypeArguments="x:String">["SDQ_"+(ItemNumber+1).ToString.PadLeft(2,CChar(“0”))]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <If Condition="[ItemNumber&gt;2 and ItemNumber&lt;=CInt(MaxItems)]" sap:VirtualizedContainerService.HintSize="575,642" sap2010:WorkflowViewState.IdRef="If_3">
+                          <If Condition="[ItemNumber&gt;2 and ItemNumber&lt;=CInt(MaxItems)]" sap:VirtualizedContainerService.HintSize="575,1126" sap2010:WorkflowViewState.IdRef="If_3">
                             <If.Then>
-                              <Sequence sap:VirtualizedContainerService.HintSize="539,651" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                              <Sequence sap:VirtualizedContainerService.HintSize="539,949" sap2010:WorkflowViewState.IdRef="Sequence_5">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_ValueDictionary(&quot;Inventory Identifier&quot;).ToString]" sap:VirtualizedContainerService.HintSize="497,182" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                                <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_ValueDictionary(&quot;Inventory Identifier&quot;).ToString]" sap:VirtualizedContainerService.HintSize="497,480" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                                   <Switch.Default>
                                     <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_16">
                                       <Assign.To>
@@ -265,7 +259,7 @@
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
-                                  <Sequence x:Key="QU" sap:VirtualizedContainerService.HintSize="304,246" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                  <Sequence x:Key="QU" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_9">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -281,10 +275,10 @@
                                     </Assign>
                                     <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_15">
                                       <Assign.To>
-                                        <OutArgument x:TypeArguments="x:String">[io_ValueDictionary("Returns")]</OutArgument>
+                                        <OutArgument x:TypeArguments="x:String">[io_ValueDictionary("Sales")]</OutArgument>
                                       </Assign.To>
                                       <Assign.Value>
-                                        <InArgument x:TypeArguments="x:String">[JsonDic(NextKey).ToString]</InArgument>
+                                        <InArgument x:TypeArguments="x:String">[If(JsonDic(NextKey).ToString.Contains("-"),JsonDic(NextKey).ToString,"-"+JsonDic(NextKey).ToString)]</InArgument>
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
