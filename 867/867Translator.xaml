@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\1061359_DANDH_EDI_X867__60C14C35-1E23-4DFB-8168-FABA486A7EEC_.edi.edi.json" this:JsonReader.in_OutputFile="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\Test.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\JSON\1061512_SYNNEX_202105090234_ARLO_VUS_867_9676011.edi.edi.json" this:JsonReader.in_OutputFile="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\JSON\1061512_SYNNEX_202105090234_ARLO_VUS_867_9676011.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
     <x:Property Name="in_OutputFile" Type="InArgument(x:String)" />
@@ -6,7 +6,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1146,1631</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>955,1631</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -114,7 +114,7 @@
         <OutArgument x:TypeArguments="x:String">[SenderID]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[JsonObject("ISA_LOOP_1")(0)("ISA_06").ToString]</InArgument>
+        <InArgument x:TypeArguments="x:String">[JsonObject("ISA_LOOP_1")(0)("ISA_06").ToString.Trim]</InArgument>
       </Assign.Value>
     </Assign>
     <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="412,690" sap2010:WorkflowViewState.IdRef="ForEach`1_11" Values="[(from i in JsonObject(&quot;ISA_LOOP_1&quot;)(1)(&quot;GS_LOOP_1&quot;) let temp = i.ToObject(of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ST_LOOP&quot;)) Select temp)]">
@@ -283,13 +283,13 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
-            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each PTD" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[PTArray]">
+            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each PTD" sap:VirtualizedContainerService.HintSize="833,1598" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[PTArray]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="njl:JObject">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="njl:JObject" Name="item" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="797,1702" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="797,1464" sap2010:WorkflowViewState.IdRef="Sequence_30">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="njl:JObject[]" Name="PTLoop" />
                       <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
@@ -689,8 +689,15 @@
                       </Assign>
                       <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddSaleOrReturn workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867/AddSaleOrReturn.xaml">
                         <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">[from i in QTYLoop("QTY_LOOP_1") Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)]</InArgument>
-                          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
+                          <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">
+                            <mva:VisualBasicValue x:TypeArguments="sc:IEnumerable" ExpressionText="from i in QTYLoop(&quot;QTY_LOOP_1&quot;) Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)" />
+                          </InArgument>
+                          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">
+                            <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="ValueDictionary" />
+                          </InOutArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_SenderId">
+                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="SenderID" />
+                          </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                     </Sequence>
