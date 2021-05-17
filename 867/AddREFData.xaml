@@ -2,11 +2,12 @@
   <x:Members>
     <x:Property Name="in_Item" Type="InArgument(sc:IEnumerable)" />
     <x:Property Name="io_ValueDictionary" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
+    <x:Property Name="in_OutputFile" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1146,598</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>955,631</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>AddREFData_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -64,17 +65,17 @@
       <AssemblyReference>System.Memory</AssemblyReference>
       <AssemblyReference>UiPath.Excel</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="AddREFData" sap:VirtualizedContainerService.HintSize="242,252" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="AddREFData" sap:VirtualizedContainerService.HintSize="242,340" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Sequence DisplayName="Initialise Key Value Pairs" sap:VirtualizedContainerService.HintSize="304,452" sap2010:WorkflowViewState.IdRef="Sequence_2">
+    <Sequence DisplayName="Initialise Key Value Pairs" sap:VirtualizedContainerService.HintSize="200,66" sap2010:WorkflowViewState.IdRef="Sequence_2">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -122,7 +123,7 @@
         </Assign.Value>
       </Assign>
     </Sequence>
-    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each Ref Item" sap:VirtualizedContainerService.HintSize="200,52" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Item]">
+    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each Ref Item" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[in_Item]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:Dictionary(x:String, x:String)">
           <ActivityAction.Argument>
@@ -166,7 +167,7 @@
                 </If>
               </If.Then>
             </If>
-            <If Condition="[item(&quot;REF_01&quot;).ToString.Equals(&quot;IV&quot;)]" DisplayName="If Seller Invoice Number or Service Code" sap:VirtualizedContainerService.HintSize="484,237" sap2010:WorkflowViewState.IdRef="If_3">
+            <If Condition="[item(&quot;REF_01&quot;).ToString.Equals(&quot;IV&quot;)]" DisplayName="If Seller Invoice Number or Service Code" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_3">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -184,7 +185,7 @@
                 </Assign>
               </If.Then>
             </If>
-            <If Condition="[item(&quot;REF_01&quot;).ToString.Equals(&quot;PO&quot;)]" DisplayName="If PO Number" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_4">
+            <If Condition="[item(&quot;REF_01&quot;).ToString.Equals(&quot;PO&quot;)]" DisplayName="If PO Number" sap:VirtualizedContainerService.HintSize="484,237" sap2010:WorkflowViewState.IdRef="If_4">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -212,5 +213,27 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
+    <If Condition="[File.Exists(in_OutputFile)]" DisplayName="If File Exists" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_5">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <ui:AppendLine DisplayName="Append Line" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[String.Join(&quot;|&quot;,io_ValueDictionary.Values)]" UseDefaultEncoding="False" />
+      </If.Then>
+      <If.Else>
+        <Sequence sap:VirtualizedContainerService.HintSize="376,396" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:WriteTextFile DisplayName="Write Text File" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[String.Join(&quot;|&quot;,io_ValueDictionary.Keys)]" />
+          <ui:AppendLine DisplayName="Append Line" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="AppendLine_2" Text="[String.Join(&quot;|&quot;,io_ValueDictionary.Values)]" UseDefaultEncoding="False" />
+        </Sequence>
+      </If.Else>
+    </If>
   </Sequence>
 </Activity>

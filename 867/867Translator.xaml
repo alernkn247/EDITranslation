@@ -289,7 +289,7 @@
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="njl:JObject" Name="item" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="797,1464" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="304,870" sap2010:WorkflowViewState.IdRef="Sequence_30">
                     <Sequence.Variables>
                       <Variable x:TypeArguments="njl:JObject[]" Name="PTLoop" />
                       <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
@@ -302,7 +302,7 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="755,60" sap2010:WorkflowViewState.IdRef="Assign_56">
+                    <Assign DisplayName="Assign Report Start Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_56">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[ValueDictionary("Report Start Date")]</OutArgument>
                       </Assign.To>
@@ -310,7 +310,7 @@
                         <InArgument x:TypeArguments="x:String">[ReportStartDate]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="755,60" sap2010:WorkflowViewState.IdRef="Assign_57">
+                    <Assign DisplayName="Assign Report End Date" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_57">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[ValueDictionary("Report End Date")]</OutArgument>
                       </Assign.To>
@@ -318,7 +318,7 @@
                         <InArgument x:TypeArguments="x:String">[ReportEndDate]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="Asssign Distributor Name" sap:VirtualizedContainerService.HintSize="755,60" sap2010:WorkflowViewState.IdRef="Assign_61">
+                    <Assign DisplayName="Asssign Distributor Name" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_61">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[ValueDictionary("Name Of Distributor")]</OutArgument>
                       </Assign.To>
@@ -326,7 +326,7 @@
                         <InArgument x:TypeArguments="x:String">[DistributorName]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="Assign Distributor Country" sap:VirtualizedContainerService.HintSize="755,60" sap2010:WorkflowViewState.IdRef="Assign_62">
+                    <Assign DisplayName="Assign Distributor Country" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_62">
                       <Assign.To>
                         <OutArgument x:TypeArguments="x:String">[ValueDictionary("Counrty Of Distributor")]</OutArgument>
                       </Assign.To>
@@ -334,7 +334,7 @@
                         <InArgument x:TypeArguments="x:String">[DistributorCountry]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Assign DisplayName="Assign PT Loop" sap:VirtualizedContainerService.HintSize="755,60" sap2010:WorkflowViewState.IdRef="Assign_30">
+                    <Assign DisplayName="Assign PT Loop" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_30">
                       <Assign.To>
                         <OutArgument x:TypeArguments="njl:JObject[]">[PTLoop]</OutArgument>
                       </Assign.To>
@@ -342,7 +342,7 @@
                         <InArgument x:TypeArguments="njl:JObject[]" xml:space="preserve">[(From i In item.First.First.ToObject(Of JArray) Let temp = i.ToObject(Of JObject)  where temp.Properties.Any(Function(x) x.Name.Equals("N1_LOOP_1") OR x.Name.Equals("N1_LOOP_2") OR x.Name.Equals("QTY_LOOP_1") ) Select temp).ToArray]</InArgument>
                       </Assign.Value>
                     </Assign>
-                    <Sequence DisplayName="N1 Loop 1" sap:VirtualizedContainerService.HintSize="755,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                    <Sequence DisplayName="N1 Loop 1" sap:VirtualizedContainerService.HintSize="262,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -505,7 +505,7 @@
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:CommentOut>
                     </Sequence>
-                    <Sequence DisplayName="N1 Loop 2" sap:VirtualizedContainerService.HintSize="755,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
+                    <Sequence DisplayName="N1 Loop 2" sap:VirtualizedContainerService.HintSize="262,66" sap2010:WorkflowViewState.IdRef="Sequence_22">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -698,25 +698,12 @@
                           <InArgument x:TypeArguments="x:String" x:Key="in_SenderId">
                             <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="SenderID" />
                           </InArgument>
+                          <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">
+                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OutputFile" />
+                          </InArgument>
                         </ui:InvokeWorkflowFile.Arguments>
                       </ui:InvokeWorkflowFile>
                     </Sequence>
-                    <If Condition="[File.Exists(in_OutputFile)]" sap:VirtualizedContainerService.HintSize="755,554" sap2010:WorkflowViewState.IdRef="If_29">
-                      <If.Then>
-                        <ui:AppendLine DisplayName="Append Line" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="AppendLine_1" Text="[String.Join(&quot;|&quot;,ValueDictionary.Values)]" UseDefaultEncoding="False" />
-                      </If.Then>
-                      <If.Else>
-                        <Sequence sap:VirtualizedContainerService.HintSize="376,396" sap2010:WorkflowViewState.IdRef="Sequence_31">
-                          <sap:WorkflowViewStateService.ViewState>
-                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                            </scg:Dictionary>
-                          </sap:WorkflowViewStateService.ViewState>
-                          <ui:WriteTextFile DisplayName="Write Text File" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[String.Join(&quot;|&quot;,ValueDictionary.Keys)]" />
-                          <ui:AppendLine DisplayName="Append Line" FileName="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="334,132" sap2010:WorkflowViewState.IdRef="AppendLine_2" Text="[String.Join(&quot;|&quot;,ValueDictionary.Values)]" UseDefaultEncoding="False" />
-                        </Sequence>
-                      </If.Else>
-                    </If>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEach.Body>

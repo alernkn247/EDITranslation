@@ -3,6 +3,7 @@
     <x:Property Name="in_Item" Type="InArgument(sc:IEnumerable)" />
     <x:Property Name="io_ValueDictionary" Type="InOutArgument(scg:Dictionary(x:String, x:String))" />
     <x:Property Name="in_SenderId" Type="InArgument(x:String)" />
+    <x:Property Name="in_OutputFile" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
@@ -165,7 +166,7 @@
         <InArgument x:TypeArguments="x:String">[Type]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each QTY Loop item" sap:VirtualizedContainerService.HintSize="307,641" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_Item]">
+    <ui:ForEach x:TypeArguments="scg:Dictionary(x:String, x:String)" CurrentIndex="{x:Null}" DisplayName="For Each QTY Loop item" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[in_Item]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="scg:Dictionary(x:String, x:String)">
           <ActivityAction.Argument>
@@ -350,8 +351,15 @@
     </ui:ForEach>
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddREFData workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867\AddREFData.xaml">
       <ui:InvokeWorkflowFile.Arguments>
-        <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">[(from i in in_Item.OfType(Of Dictionary(of string,string)) where i.Keys.Any(function(x) x.StartsWith("REF")) select i)]</InArgument>
-        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[io_ValueDictionary]</InOutArgument>
+        <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">
+          <mva:VisualBasicValue x:TypeArguments="sc:IEnumerable" ExpressionText="(from i in in_Item.OfType(Of Dictionary(of string,string)) where i.Keys.Any(function(x) x.StartsWith(&quot;REF&quot;)) select i)" />
+        </InArgument>
+        <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">
+          <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="io_ValueDictionary" />
+        </InOutArgument>
+        <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">
+          <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OutputFile" />
+        </InArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
   </Sequence>
