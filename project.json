@@ -1,5 +1,5 @@
 {
-  "name": "EDITransaltor",
+  "name": "EDITranslator",
   "description": "Robotic Enterprise Framework",
   "main": "Main.xaml",
   "dependencies": {
@@ -16,7 +16,7 @@
   "runtimeOptions": {
     "autoDispose": false,
     "isPausable": true,
-    "requiresUserInteraction": true,
+    "requiresUserInteraction": false,
     "supportsPersistence": false,
     "excludedLoggedData": [
       "Private:*",
