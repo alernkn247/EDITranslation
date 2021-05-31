@@ -1,12 +1,14 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\JSON\1061512_SYNNEX_202105090234_ARLO_VUS_867_9676011.edi.edi.json" this:JsonReader.in_OutputFile="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\JSON\1061512_SYNNEX_202105090234_ARLO_VUS_867_9676011.csv" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="JsonReader" this:JsonReader.in_FilePath="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-16\JSON\1070610_INGRAM_e72763f0-b61c-11eb-821c-08770a0c4020.edi.json" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=mscorlib" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_FilePath" Type="InArgument(x:String)" />
-    <x:Property Name="in_OutputFile" Type="InArgument(x:String)" />
+    <x:Property Name="in_FileName" Type="InArgument(x:String)" />
+    <x:Property Name="in_XLSXFolder" Type="InArgument(x:String)" />
+    <x:Property Name="in_CSVFolder" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>955,1631</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>955,1712</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -87,7 +89,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="454,1466" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="454,1547" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="JsonText" />
       <Variable x:TypeArguments="njl:JObject" Name="JsonObject" />
@@ -101,12 +103,30 @@
       <Variable x:TypeArguments="x:String" Name="DistributorName" />
       <Variable x:TypeArguments="x:String" Name="DistributorCountry" />
       <Variable x:TypeArguments="sd:DataTable" Name="OutputDT" />
+      <Variable x:TypeArguments="x:String" Name="CSVFilepath" />
+      <Variable x:TypeArguments="x:String" Name="XLSXFilepath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <Assign DisplayName="Set CSV FilePath" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_66">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[CSVFilepath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Path.Combine(in_CSVFolder,in_FileName)+".csv"]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <Assign DisplayName="Set XLSX FilePath" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_67">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[XLSXFilepath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Path.Combine(in_XLSXFolder,in_FileName)+".xlsx"]</InArgument>
+      </Assign.Value>
+    </Assign>
     <ui:ReadTextFile Content="[JsonText]" DisplayName="Read Text File" FileName="[in_FilePath]" sap:VirtualizedContainerService.HintSize="412,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
     <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[JsonObject]" JsonString="[JsonText]" />
     <Assign sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_64">
@@ -283,7 +303,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
-            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each PTD" sap:VirtualizedContainerService.HintSize="833,1598" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[PTArray]">
+            <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each PTD" sap:VirtualizedContainerService.HintSize="334,51" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[PTArray]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="njl:JObject">
                   <ActivityAction.Argument>
@@ -295,7 +315,7 @@
                       <Variable x:TypeArguments="njl:JObject" Name="N1Loop1" />
                       <Variable x:TypeArguments="scg:Dictionary(x:String, x:String)" Default="[new Dictionary(Of string,string)]" Name="ValueDictionary" />
                       <Variable x:TypeArguments="njl:JObject" Name="N1Loop2" />
-                      <Variable x:TypeArguments="njl:JObject" Name="QTYLoop" />
+                      <Variable x:TypeArguments="njl:JObject[]" Name="QTYLoop" />
                     </Sequence.Variables>
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -339,7 +359,7 @@
                         <OutArgument x:TypeArguments="njl:JObject[]">[PTLoop]</OutArgument>
                       </Assign.To>
                       <Assign.Value>
-                        <InArgument x:TypeArguments="njl:JObject[]" xml:space="preserve">[(From i In item.First.First.ToObject(Of JArray) Let temp = i.ToObject(Of JObject)  where temp.Properties.Any(Function(x) x.Name.Equals("N1_LOOP_1") OR x.Name.Equals("N1_LOOP_2") OR x.Name.Equals("QTY_LOOP_1") ) Select temp).ToArray]</InArgument>
+                        <InArgument x:TypeArguments="njl:JObject[]" xml:space="preserve">[(From i In item.First.First.ToObject(Of JArray) Let temp = i.ToObject(Of JObject)  where temp.Properties.Any(Function(x) x.Name.Equals("N1_LOOP_1") OR x.Name.Equals("N1_LOOP_2") OR x.Name.StartsWith("QTY_LOOP") ) Select temp).ToArray]</InArgument>
                       </Assign.Value>
                     </Assign>
                     <Sequence DisplayName="N1 Loop 1" sap:VirtualizedContainerService.HintSize="262,66" sap2010:WorkflowViewState.IdRef="Sequence_19">
@@ -672,37 +692,45 @@
                         </sap:WorkflowViewStateService.ViewState>
                       </ui:CommentOut>
                     </Sequence>
-                    <Sequence DisplayName="QTY Loop" sap:VirtualizedContainerService.HintSize="376,304" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                    <Sequence DisplayName="QTY Loop" sap:VirtualizedContainerService.HintSize="454,530" sap2010:WorkflowViewState.IdRef="Sequence_29">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                           <x:Boolean x:Key="IsPinned">True</x:Boolean>
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
-                      <Assign DisplayName="Assign QTY Loop" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="Assign_45">
+                      <Assign DisplayName="Assign QTY Loop" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_45">
                         <Assign.To>
-                          <OutArgument x:TypeArguments="njl:JObject">[QTYLoop]</OutArgument>
+                          <OutArgument x:TypeArguments="njl:JObject[]">[QTYLoop]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="njl:JObject">[(from i in PTLoop let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.Contains("QTY_LOOP_1")) Select temp)(0)]</InArgument>
+                          <InArgument x:TypeArguments="njl:JObject[]">[(from i in PTLoop let temp = i.ToObject(Of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith("QTY_LOOP")) Select temp).ToArray]</InArgument>
                         </Assign.Value>
                       </Assign>
-                      <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddSaleOrReturn workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867/AddSaleOrReturn.xaml">
-                        <ui:InvokeWorkflowFile.Arguments>
-                          <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">
-                            <mva:VisualBasicValue x:TypeArguments="sc:IEnumerable" ExpressionText="from i in QTYLoop(&quot;QTY_LOOP_1&quot;) Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)" />
-                          </InArgument>
-                          <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">
-                            <mva:VisualBasicReference x:TypeArguments="scg:Dictionary(x:String, x:String)" ExpressionText="ValueDictionary" />
-                          </InOutArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_SenderId">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="SenderID" />
-                          </InArgument>
-                          <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">
-                            <mva:VisualBasicValue x:TypeArguments="x:String" ExpressionText="in_OutputFile" />
-                          </InArgument>
-                        </ui:InvokeWorkflowFile.Arguments>
-                      </ui:InvokeWorkflowFile>
+                      <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="412,338" sap2010:WorkflowViewState.IdRef="ForEach`1_12" Values="[QTYLoop]">
+                        <ui:ForEach.Body>
+                          <ActivityAction x:TypeArguments="njl:JObject">
+                            <ActivityAction.Argument>
+                              <DelegateInArgument x:TypeArguments="njl:JObject" Name="qtyitem" />
+                            </ActivityAction.Argument>
+                            <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,204" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke AddSaleOrReturn workflow" sap:VirtualizedContainerService.HintSize="334,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_3" LogEntry="No" LogExit="No" UnSafe="False" WorkflowFileName="867/AddSaleOrReturn.xaml">
+                                <ui:InvokeWorkflowFile.Arguments>
+                                  <InArgument x:TypeArguments="sc:IEnumerable" x:Key="in_Item">[from i in qtyitem.First.First Select i.ToDictionary(Function(x) x.ToObject(Of JProperty).Name,Function(y) y.ToObject(Of JProperty).Value.ToString)]</InArgument>
+                                  <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_SenderId">[SenderID]</InArgument>
+                                  <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">[CSVFilepath]</InArgument>
+                                </ui:InvokeWorkflowFile.Arguments>
+                              </ui:InvokeWorkflowFile>
+                            </Sequence>
+                          </ActivityAction>
+                        </ui:ForEach.Body>
+                      </ui:ForEach>
                     </Sequence>
                   </Sequence>
                 </ActivityAction>
@@ -718,7 +746,7 @@
         </ActivityAction>
       </ui:ForEach.Body>
     </ui:ForEach>
-    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[in_OutputFile]" sap:VirtualizedContainerService.HintSize="412,51" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[CSVFilepath]" sap:VirtualizedContainerService.HintSize="412,51" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -726,7 +754,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadCsvFile>
-    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="412,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[in_OutputFile+&quot;.xlsx&quot;]" />
-    <ui:Delete ContinueOnError="{x:Null}" sap:VirtualizedContainerService.HintSize="412,79" sap2010:WorkflowViewState.IdRef="Delete_1" Path="[in_OutputFile]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="412,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[XLSXFilepath]" />
   </Sequence>
 </Activity>

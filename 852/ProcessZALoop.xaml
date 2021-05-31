@@ -140,7 +140,7 @@
                 </Assign>
               </If.Then>
             </If>
-            <If Condition="[JsonDic.Keys.Any(Function(x) x.StartsWith(&quot;SDQ&quot;))]" DisplayName="If SDQ" sap:VirtualizedContainerService.HintSize="731,1943" sap2010:WorkflowViewState.IdRef="If_2">
+            <If Condition="[JsonDic.Keys.Any(Function(x) x.StartsWith(&quot;SDQ&quot;))]" DisplayName="If SDQ" sap:VirtualizedContainerService.HintSize="731,1645" sap2010:WorkflowViewState.IdRef="If_2">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -148,7 +148,7 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
               <If.Then>
-                <Sequence sap:VirtualizedContainerService.HintSize="695,1766" sap2010:WorkflowViewState.IdRef="Sequence_4">
+                <Sequence sap:VirtualizedContainerService.HintSize="695,1468" sap2010:WorkflowViewState.IdRef="Sequence_4">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -162,13 +162,13 @@
                       <InArgument x:TypeArguments="x:String">[Regex.Match(JsonDic.Last.Key,"\d+").ToString]</InArgument>
                     </Assign.Value>
                   </Assign>
-                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,1574" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[(from i in JsonDic.Keys let val = CInt(Regex.Match(i,&quot;\d+&quot;).ToString) where val mod 2= 1 Select i)]">
+                  <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="653,1276" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[(from i in JsonDic.Keys let val = CInt(Regex.Match(i,&quot;\d+&quot;).ToString) where val mod 2= 1 Select i)]">
                     <ui:ForEach.Body>
                       <ActivityAction x:TypeArguments="x:String">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="617,1440" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="617,1142" sap2010:WorkflowViewState.IdRef="Sequence_3">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Int32" Name="ItemNumber" />
                             <Variable x:TypeArguments="x:String" Name="NextKey" />
@@ -194,15 +194,15 @@
                               <InArgument x:TypeArguments="x:String">["SDQ_"+(ItemNumber+1).ToString.PadLeft(2,CChar(“0”))]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <If Condition="[ItemNumber&gt;2 and ItemNumber&lt;=CInt(MaxItems)]" sap:VirtualizedContainerService.HintSize="575,1148" sap2010:WorkflowViewState.IdRef="If_3">
+                          <If Condition="[ItemNumber&gt;2 and ItemNumber&lt;=CInt(MaxItems)]" sap:VirtualizedContainerService.HintSize="575,850" sap2010:WorkflowViewState.IdRef="If_3">
                             <If.Then>
-                              <Sequence sap:VirtualizedContainerService.HintSize="539,971" sap2010:WorkflowViewState.IdRef="Sequence_5">
+                              <Sequence sap:VirtualizedContainerService.HintSize="539,673" sap2010:WorkflowViewState.IdRef="Sequence_5">
                                 <sap:WorkflowViewStateService.ViewState>
                                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_ValueDictionary(&quot;Inventory Identifier&quot;).ToString]" sap:VirtualizedContainerService.HintSize="497,502" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                                <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[io_ValueDictionary(&quot;Inventory Identifier&quot;).ToString]" sap:VirtualizedContainerService.HintSize="497,204" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                                   <Switch.Default>
                                     <Assign sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_16">
                                       <Assign.To>
@@ -213,7 +213,7 @@
                                       </Assign.Value>
                                     </Assign>
                                   </Switch.Default>
-                                  <Sequence x:Key="QA" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                                  <Sequence x:Key="QA" sap:VirtualizedContainerService.HintSize="304,249" sap2010:WorkflowViewState.IdRef="Sequence_7">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -236,7 +236,7 @@
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
-                                  <Sequence x:Key="QS" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_8">
+                                  <Sequence x:Key="QS" sap:VirtualizedContainerService.HintSize="304,249" sap2010:WorkflowViewState.IdRef="Sequence_8">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -259,7 +259,7 @@
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
-                                  <Sequence x:Key="QU" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                  <Sequence x:Key="QU" sap:VirtualizedContainerService.HintSize="304,249" sap2010:WorkflowViewState.IdRef="Sequence_9">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -282,7 +282,7 @@
                                       </Assign.Value>
                                     </Assign>
                                   </Sequence>
-                                  <Sequence x:Key="QI" sap:VirtualizedContainerService.HintSize="304,252" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                  <Sequence x:Key="QI" sap:VirtualizedContainerService.HintSize="304,249" sap2010:WorkflowViewState.IdRef="Sequence_10">
                                     <sap:WorkflowViewStateService.ViewState>
                                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -308,7 +308,7 @@
                                 </Switch>
                                 <If Condition="[ExtractInfo]" sap:VirtualizedContainerService.HintSize="497,237" sap2010:WorkflowViewState.IdRef="If_5">
                                   <If.Then>
-                                    <If Condition="[File.Exists(in_OutputFile)]" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="If_4">
+                                    <If Condition="[File.Exists(in_OutputFile)]" sap:VirtualizedContainerService.HintSize="755,554" sap2010:WorkflowViewState.IdRef="If_4">
                                       <sap:WorkflowViewStateService.ViewState>
                                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
