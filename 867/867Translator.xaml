@@ -4,11 +4,12 @@
     <x:Property Name="in_FileName" Type="InArgument(x:String)" />
     <x:Property Name="in_XLSXFolder" Type="InArgument(x:String)" />
     <x:Property Name="in_CSVFolder" Type="InArgument(x:String)" />
+    <x:Property Name="out_XLSXFilepath" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>955,1712</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>833,1712</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="70">
@@ -81,7 +82,6 @@
       <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
-      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
@@ -104,7 +104,6 @@
       <Variable x:TypeArguments="x:String" Name="DistributorCountry" />
       <Variable x:TypeArguments="sd:DataTable" Name="OutputDT" />
       <Variable x:TypeArguments="x:String" Name="CSVFilepath" />
-      <Variable x:TypeArguments="x:String" Name="XLSXFilepath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -121,7 +120,7 @@
     </Assign>
     <Assign DisplayName="Set XLSX FilePath" sap:VirtualizedContainerService.HintSize="412,60" sap2010:WorkflowViewState.IdRef="Assign_67">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[XLSXFilepath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[out_XLSXFilepath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[Path.Combine(in_XLSXFolder,in_FileName)+".xlsx"]</InArgument>
@@ -754,6 +753,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadCsvFile>
-    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="412,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[XLSXFilepath]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="412,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[out_XLSXFilepath]" />
   </Sequence>
 </Activity>

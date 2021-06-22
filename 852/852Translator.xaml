@@ -4,11 +4,13 @@
     <x:Property Name="in_FileName" Type="InArgument(x:String)" />
     <x:Property Name="in_XLSXFolder" Type="InArgument(x:String)" />
     <x:Property Name="in_CSVFolder" Type="InArgument(x:String)" />
+    <x:Property Name="out_XLSXFilepath" Type="OutArgument(x:String)" />
+    <x:Property Name="out_CSVFilepath" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>955,1073</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>832,1085.33333333333</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="38">
@@ -89,7 +91,7 @@
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="426,908" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="JsonReader" sap:VirtualizedContainerService.HintSize="426,920.666666666667" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="JsonText" />
       <Variable x:TypeArguments="njl:JObject" Name="JsonObject" />
@@ -105,33 +107,31 @@
       <Variable x:TypeArguments="sd:DataTable" Name="OutputDT" />
       <Variable x:TypeArguments="scg:Dictionary(x:String, x:Object)" Name="JsonDic" />
       <Variable x:TypeArguments="x:String" Default="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\5-9\JSON\1061522_BestBuyUSS852STERLING_392055411297321075222109.csv" Name="OutputFile" />
-      <Variable x:TypeArguments="x:String" Name="CSVFilepath" />
-      <Variable x:TypeArguments="x:String" Name="XLSXFilepath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Set CSV FilePath" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_74">
+    <Assign DisplayName="Set CSV FilePath" sap:VirtualizedContainerService.HintSize="384,62" sap2010:WorkflowViewState.IdRef="Assign_74">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[CSVFilepath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[out_CSVFilepath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[Path.Combine(in_CSVFolder,in_FileName)+".csv"]</InArgument>
       </Assign.Value>
     </Assign>
-    <Assign DisplayName="Set XLSX FilePath" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_75">
+    <Assign DisplayName="Set XLSX FilePath" sap:VirtualizedContainerService.HintSize="384,62" sap2010:WorkflowViewState.IdRef="Assign_75">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[XLSXFilepath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[out_XLSXFilepath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[Path.Combine(in_XLSXFolder,in_FileName)+".xlsx"]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ReadTextFile Content="[JsonText]" DisplayName="Read Text File" FileName="[in_FilePath]" sap:VirtualizedContainerService.HintSize="384,79" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
-    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonObject]" JsonString="[JsonText]" />
-    <Assign sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_70">
+    <ui:ReadTextFile Content="[JsonText]" DisplayName="Read Text File" FileName="[in_FilePath]" sap:VirtualizedContainerService.HintSize="384,80.6666666666667" sap2010:WorkflowViewState.IdRef="ReadTextFile_1" />
+    <ui:DeserializeJson x:TypeArguments="njl:JObject" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="384,62" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_3" JsonObject="[JsonObject]" JsonString="[JsonText]" />
+    <Assign sap:VirtualizedContainerService.HintSize="384,62" sap2010:WorkflowViewState.IdRef="Assign_70">
       <Assign.To>
         <OutArgument x:TypeArguments="x:String">[SenderID]</OutArgument>
       </Assign.To>
@@ -139,7 +139,7 @@
         <InArgument x:TypeArguments="x:String">[JsonObject("ISA_LOOP_1")(0)("ISA_06").ToString]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="ForEach`1_15" Values="[(from i in JsonObject(&quot;ISA_LOOP_1&quot;)(1)(&quot;GS_LOOP_1&quot;) let temp = i.ToObject(of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ST_LOOP&quot;)) Select temp)]">
+    <ui:ForEach x:TypeArguments="njl:JObject" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="384,52.6666666666667" sap2010:WorkflowViewState.IdRef="ForEach`1_15" Values="[(from i in JsonObject(&quot;ISA_LOOP_1&quot;)(1)(&quot;GS_LOOP_1&quot;) let temp = i.ToObject(of JObject) where temp.Properties.Any(Function(x) x.Name.StartsWith(&quot;ST_LOOP&quot;)) Select temp)]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="njl:JObject">
           <ActivityAction.Argument>
@@ -300,7 +300,7 @@
                               <ui:InvokeWorkflowFile.Arguments>
                                 <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:String)" x:Key="io_ValueDictionary">[ValueDictionary]</InOutArgument>
                                 <InArgument x:TypeArguments="njl:JObject" x:Key="in_ZAItem">[obj]</InArgument>
-                                <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">[CSVFilepath]</InArgument>
+                                <InArgument x:TypeArguments="x:String" x:Key="in_OutputFile">[out_CSVFilepath]</InArgument>
                               </ui:InvokeWorkflowFile.Arguments>
                             </ui:InvokeWorkflowFile>
                           </Sequence>
@@ -327,7 +327,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[CSVFilepath]" sap:VirtualizedContainerService.HintSize="384,51" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
+    <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[out_CSVFilepath]" sap:VirtualizedContainerService.HintSize="384,52.6666666666667" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -335,6 +335,6 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadCsvFile>
-    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="384,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[XLSXFilepath]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="384,114.666666666667" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[out_XLSXFilepath]" />
   </Sequence>
 </Activity>

@@ -4,11 +4,12 @@
     <x:Property Name="in_FileName" Type="InArgument(x:String)" />
     <x:Property Name="in_XLSXFolder" Type="InArgument(x:String)" />
     <x:Property Name="in_CSVFolder" Type="InArgument(x:String)" />
+    <x:Property Name="out_XLSXFilepath" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>955,1712</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>833,1712</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>JsonReader_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="39">
@@ -98,7 +99,6 @@
       <Variable x:TypeArguments="njl:JObject[]" Name="UNHLoop" />
       <Variable x:TypeArguments="x:String" Default="C:\Users\Alen\Zoho Docs\Shared with Me\Arlo\Set Up\EDI\EDITranslation\MediaMarkt\000333957142" Name="OutputFile" />
       <Variable x:TypeArguments="x:String" Name="CSVFilepath" />
-      <Variable x:TypeArguments="x:String" Name="XLSXFilepath" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -115,7 +115,7 @@
     </Assign>
     <Assign DisplayName="Set XLSX FilePath" sap:VirtualizedContainerService.HintSize="384,60" sap2010:WorkflowViewState.IdRef="Assign_103">
       <Assign.To>
-        <OutArgument x:TypeArguments="x:String">[XLSXFilepath]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[out_XLSXFilepath]</OutArgument>
       </Assign.To>
       <Assign.Value>
         <InArgument x:TypeArguments="x:String">[Path.Combine(in_XLSXFolder,in_FileName)+".xlsx"]</InArgument>
@@ -514,6 +514,6 @@
       </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
     <ui:ReadCsvFile Encoding="{x:Null}" DataTable="[OutputDT]" Delimitator="Pipe" DisplayName="Read CSV" FilePath="[CSVFilepath]" sap:VirtualizedContainerService.HintSize="384,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_2" />
-    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="384,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[XLSXFilepath]" />
+    <ui:WriteRange AddHeaders="True" DataTable="[OutputDT]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="384,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[out_XLSXFilepath]" />
   </Sequence>
 </Activity>
